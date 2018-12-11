@@ -1,0 +1,9 @@
+2018-11-27 20:52:05.524 [RMI TCP Connection(3)-127.0.0.1] |-INFO  cup.cw.mall.cache.redis.RedisConfig - 读取redis.properties成功！
+2018-11-27 20:52:05.550 [RMI TCP Connection(3)-127.0.0.1] |-INFO  cup.cw.mall.cache.redis.RedisConfig - 加载redis.propertis成功！
+2018-11-27 21:07:15.329 [http-apr-8080-exec-1] |-INFO  cup.cw.mall.service.impl.OrderServiceImpl - 支付宝预下单成功:
+2018-11-27 21:07:15.330 [http-apr-8080-exec-1] |-INFO  cup.cw.mall.service.impl.OrderServiceImpl - code:10000, msg:Success
+2018-11-27 21:07:15.330 [http-apr-8080-exec-1] |-INFO  cup.cw.mall.service.impl.OrderServiceImpl - body:{"alipay_trade_precreate_response":{"code":"10000","msg":"Success","out_trade_no":"1543323905335","qr_code":"https:\/\/qr.alipay.com\/bax03713djal83eogt9900f1"},"sign":"ei2TqdHAgbIu2JV0b8CKZDkpZZrv6mLTnrCr+XhxvOO1nDjG+t13mIHag+rIJHrrZic7nCJirmFRO05/rzPTPFE/iulZ7QzHZ7hDWnKwaIsfR7AMAThSunTYW+dPNnlC+WjVEbRuDojhgTL9FVchayiSNPA2VoN/4aNrG8mbrviQho5nSgoumRZqMBMR6DR61aio1NK992M3vi6e1/Ag4fVV6e0xs41N/nKuuDnBZkWEHfvS8kOIyj7aOSuEhmB3Eyyv3o6W78n7sgafOYesesYq2CfxelCxvUhzclkX/DmKfN7S0ZO9aVpHmc6h4OH3wsf92NhA3OaXskIwAB2wpg=="}
+2018-11-27 21:07:15.696 [http-apr-8080-exec-1] |-INFO  cup.cw.mall.util.FtpUtil - 开始连接ftp服务器...
+2018-11-27 21:07:16.992 [http-apr-8080-exec-1] |-INFO  cup.cw.mall.util.FtpUtil - 连接FTP服务器成功！ ip:www.weicui.top,username:ftpadmin
+2018-11-27 21:07:17.066 [http-apr-8080-exec-1] |-INFO  cup.cw.mall.util.FtpUtil - 上传到ftp服务器结束，上传结果：true
+2018-11-27 21:07:17.066 [http-apr-8080-exec-1] |-INFO  cup.cw.mall.service.impl.OrderServiceImpl - qrPath:F:\java\gitRepo\myMall\target\mmall\upload/qr-1543323905335.png

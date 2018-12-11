@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/mvc
+	http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <context:component-scan base-package="cup.cw.mall" annotation-config="true"/>
+
+    <!--自动注册RequstHandlerMapping与RequestMappingHandlerAdapter两个Bean,
+    这是Spring MVC为@Controller分发请求必需的，-->
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>text/plain;charset=UTF-8</value>
+                        <value>text/html;charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+            <!--配置fastjson的HttpMessageConverter-->
+            <!--不论是性能、易用性、特性支持，fastjson都要远好于默认的jackson，
+            所以如果应用程序经常使用ajax进行数据交互，建议用fastjson作为默认解析器-->
+            <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>application/json;charset=UTF-8</value>
+                    </list>
+                </property>
+                <property name="features">
+                    <list>
+                        <!-- 默认的意思就是不配置这个属性，配置了就不是默认了 -->
+                        <!-- 是否输出值为null的字段 ，默认是false-->
+                        <!--<value>WriteMapNullValue</value>-->
+                        <value>WriteNullNumberAsZero</value>
+                        <value>WriteNullListAsEmpty</value>
+                        <value>WriteNullStringAsEmpty</value>
+                        <value>WriteNullBooleanAsFalse</value>
+                        <value>WriteDateUseDateFormat</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <!-- 文件上传 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="10485760"/> <!-- 10m -->
+        <property name="maxInMemorySize" value="4096" />
+        <property name="defaultEncoding" value="UTF-8"/>
+    </bean>
+
+    <!--path后面一定是两个**-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/user/forget_get_question.do"/>
+            <mvc:exclude-mapping path="/user/forget_check_answer.do"/>
+            <mvc:exclude-mapping path="/user/forget_reset_password.do"/>
+            <mvc:exclude-mapping path="/user/reset_password.do"/>
+            <mvc:exclude-mapping path="/order/alipay_callback.do"/>
+            <mvc:exclude-mapping path="/product/**"/>
+            <mvc:exclude-mapping path="/cart/**"/>
+            <bean class="cup.cw.mall.controller.interceptor.LoginInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+</beans>
